@@ -1,0 +1,10 @@
+"appId": "a6d8c3c6-74bc-48a9-876f-a4955e1301bd",
+"displayName": "python_principle",
+"name": "http://python_principle",
+"password": "redhat@123",
+"tenant": "96e8e3d4-23c8-4d78-a8f5-87a0ef72c949"
+
+az ad sp create-for-rbac --name "python_principle" --password "redhat@123"
+
+
+
