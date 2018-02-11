@@ -30,7 +30,7 @@ def remove_expired(c,r):
             pass
   return final
 
-def check_age(final):
+def check_age(final,day):
   for i in final:
     date=age_date.replace(tzinfo=timezone('UTC'))
     xdate=i[2].replace(tzinfo=timezone('UTC'))
@@ -41,6 +41,17 @@ def check_age(final):
 
 
 if __name__=='__main__':
+  print '''
+                                                                                                     
+   _|_|                                                                                            
+ _|    _|  _|_|_|_|  _|    _|  _|  _|_|    _|_|                _|_|_|  _|_|      _|_|    _|_|_|    
+ _|_|_|_|      _|    _|    _|  _|_|      _|_|_|_|  _|_|_|_|_|  _|    _|    _|  _|    _|  _|    _|  
+ _|    _|    _|      _|    _|  _|        _|                    _|    _|    _|  _|    _|  _|    _|  
+ _|    _|  _|_|_|_|    _|_|_|  _|          _|_|_|              _|    _|    _|    _|_|    _|    _|  
+                                                                                                   
+
+If you haven't create service principe create that first: az ad sp create-for-rbac --name "any name" --password "any   password" run this command if you have install azure-cli and note down the appid,key,subscriptionid and tenant id.                                                                                                   
+'''
   try:
     with open('config.json','r') as readfile:
       data=json.load(readfile)
@@ -70,7 +81,6 @@ if __name__=='__main__':
       subscription_id
     )
   days=int(raw_input("Enter the number of days to pull the activity log : "))
-  day=int(raw_input("Enter the minimum age for resources : "))
   start_date = datetime.datetime.now() + datetime.timedelta(-(days))
   age_date= datetime.datetime.now()
   filter = " and ".join([
@@ -105,6 +115,8 @@ if __name__=='__main__':
           ]))'''
   c=find_expired(r,dr)
   final=remove_expired(c,r)
-  check_age(final)
+  while True:
+    day=int(raw_input("Enter the minimum age for resources : "))
+    check_age(final,day)
   
   
